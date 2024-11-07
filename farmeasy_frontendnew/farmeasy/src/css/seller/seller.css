@@ -1,0 +1,164 @@
+/* General Styles */
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+}
+
+/* Header & Footer */
+header,
+footer {
+  background-color: #3c8dbc;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+}
+
+header h1,
+footer h2 {
+  margin: 0;
+}
+
+/* Seller Page */
+.angseller-page {
+  padding: 20px;
+}
+
+/* Hero Section */
+.anghero {
+  background-color: rgba(53, 184, 33, 0.742);
+  color: white;
+  padding: 30px;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.anghero h1 {
+  font-size: 2.5rem;
+}
+
+/* Main Content */
+.angmain-content {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+/* Tabs */
+.angtabs {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.angtabs button {
+  background-color: greenyellow;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.angtabs button:hover {
+  background-color: green;
+}
+
+/* Listings Section */
+.anglistings-section {
+  margin-top: 20px;
+}
+
+.anglisting-item {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 10px 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
+}
+
+.anglisting-item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Edit Form */
+.angedit-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.angedit-form label {
+  margin-bottom: 10px;
+}
+
+.angedit-form input,
+.angedit-form textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+/* Listing Actions */
+.anglisting-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.anglisting-actions button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.anglisting-actions button:hover {
+  background-color: #218838;
+}
+
+/* Uploaded Images */
+.anguploaded-images {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+
+.anguploaded-image {
+  background-color: #e9ecef;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.anguploaded-image:hover {
+  background-color: #d1d1d1;
+}
+
+/* Image Preview Modal */
+.angimage-preview-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.angimage-preview-modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+}

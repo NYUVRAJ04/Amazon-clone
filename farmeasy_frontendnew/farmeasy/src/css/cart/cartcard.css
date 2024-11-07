@@ -1,0 +1,106 @@
+/* cartcard.css */
+
+.cart-card-container {
+  padding: 20px;
+  /* background-color: #f8f9fa; Light background color */
+}
+
+.cart-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start; /* Align items to the top */
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item-image {
+  width: 100%;
+  height: 150px; /* Fixed height */
+  object-fit: cover; /* Ensure the image covers the area */
+  border-radius: 8px;
+}
+
+.cart-card-content {
+  padding: 10px;
+}
+
+.cart-card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.quantity-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align items to the top */
+}
+
+.quantity-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.quantity-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-buttons button {
+  background-color: #506d2c;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.quantity-buttons button:hover {
+  background-color: #4c6132;
+}
+
+.quantity-buttons span {
+  font-size: 1rem;
+  margin: 0 10px;
+}
+
+.rent-duration {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align items to the top */
+}
+
+.duration-input {
+  width: 80px; /* Adjust the width as needed */
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.price-details {
+  text-align: left; /* Align text to the left */
+}
+
+.cart-card-price {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+  .cart-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .quantity-controls,
+  .price-details,
+  .rent-duration {
+    margin-top: 10px;
+    text-align: left;
+  }
+}

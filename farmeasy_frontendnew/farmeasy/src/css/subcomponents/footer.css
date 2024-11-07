@@ -1,0 +1,13 @@
+.footer-container {
+  height: auto;
+  text-align: center;
+}
+
+.footer-a a {
+  text-decoration: none;
+  color: white;
+}
+
+.col-footer {
+  background-color: #3c3d37;
+}

@@ -1,0 +1,105 @@
+.loan-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #939185;
+  padding: 10px; /* Reduced padding */
+}
+
+.loan-form-container {
+  width: 100%;
+  margin: 10px; /* Reduced margin */
+  padding: 10px; /* Reduced padding */
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #eeedeb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduced shadow */
+}
+
+.loan-form-container h2 {
+  text-align: center;
+  color: #2f3645;
+  font-size: 1rem;
+  margin-bottom: 15px; /* Reduced margin */
+  font-family: "Arial", sans-serif;
+}
+
+
+
+.loan-form-container label {
+  display: block;
+  margin-bottom: 4px; /* Reduced margin */
+  font-weight: bold;
+  color: #2f3645;
+}
+
+.loan-form-container input[type="text"],
+.loan-form-container input[type="number"] {
+  width: 100%;
+  padding: 8px; /* Reduced padding */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.75rem;
+}
+
+.loan-form-container button {
+  width: 100%;
+  padding: 10px; /* Reduced padding */
+  background-color: #2f3645;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.loan-form-container button:hover {
+  background-color: #1c2029;
+}
+
+.loan-form-container input[type="checkbox"] {
+  margin-top: 5px; /* Reduced margin */
+}
+
+/* Media Queries for Larger Screens */
+@media (min-width: 480px) {
+  /* .loan-form-container {
+    padding: 15px;
+  } */
+
+  .loan-form-container h2 {
+    font-size: 1.25rem;
+  }
+
+  .loan-form-container input[type="text"],
+  .loan-form-container input[type="number"] {
+    font-size: 0.875rem;
+  }
+
+  .loan-form-container button {
+    font-size: 0.875rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .loan-form-container {
+    max-width: 700px;
+    padding: 20px; /* Reduced padding */
+  }
+
+  .loan-form-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .loan-form-container input[type="text"],
+  .loan-form-container input[type="number"] {
+    font-size: 1rem;
+  }
+
+  .loan-form-container button {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InsuranceApplication.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">EligibilityMicroservice</a> &gt; <a href="index.source.html" class="el_package">com.happiest.EligibilityMicroservice.model</a> &gt; <span class="el_source">InsuranceApplication.java</span></div><h1>InsuranceApplication.java</h1><pre class="source lang-java linenums">// src/main/java/com/happiest/EligibilityMicroservice/model/InsuranceApplication.java
+
+package com.happiest.EligibilityMicroservice.model;
+
+import com.happiest.EligibilityMicroservice.dto.InsuranceApplicationRequest;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = &quot;insurance_applications&quot;)
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class InsuranceApplication {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long applicationId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = &quot;buyer_id&quot;, nullable = false)
+    private BuyersEntity buyer; // Reference to BuyersEntity
+
+    @Column(name = &quot;insurance_type&quot;, nullable = false)
+    private String insuranceType;
+
+    @Column(name = &quot;coverage_amount&quot;, nullable = false)
+    private double coverageAmount;
+
+    @Column(name = &quot;asset_value&quot;, nullable = false)
+    private double assetValue;
+
+    @Column(name = &quot;previous_claims&quot;, nullable = false)
+    private boolean previousClaims;
+
+    @Column(name = &quot;status&quot;, nullable = false)
+    private String status; // e.g., APPROVED, PENDING, REJECTED
+
+
+<span class="fc" id="L42">    public InsuranceApplication(InsuranceApplicationRequest request, BuyersEntity buyer, String status) {</span>
+<span class="fc" id="L43">        this.buyer = buyer;</span>
+<span class="fc" id="L44">        this.insuranceType = request.getInsuranceType();</span>
+<span class="fc" id="L45">        this.coverageAmount = request.getCoverageAmount();</span>
+<span class="fc" id="L46">        this.assetValue = request.getAssetValue();</span>
+<span class="fc" id="L47">        this.previousClaims = request.getPreviousClaims();</span>
+<span class="fc" id="L48">        this.status = status;</span>
+<span class="fc" id="L49">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

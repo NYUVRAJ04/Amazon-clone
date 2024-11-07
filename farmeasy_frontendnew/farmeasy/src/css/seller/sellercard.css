@@ -1,0 +1,154 @@
+.seller-container-listings {
+  margin: 20px;
+}
+
+.seller-title {
+  font-size: 24px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+/* Container for product cards */
+.seller-listings {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Styles for product cards */
+.seller-listings > div {
+  flex: 1 1 calc(33.33% - 10px); /* Three cards per row for large screens */
+  margin: 5px; /* Margin between cards */
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+  .seller-listings > div {
+    flex: 1 1 calc(50% - 10px); /* Two cards per row for mobile */
+  }
+}
+
+.seller-card {
+  width: 100%;
+  max-width: 210px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  position: relative; /* Required for absolute positioning of buttons */
+}
+
+.seller-card-image img {
+  width: 100%;
+  height: 180px;
+  border-radius: 4px;
+}
+
+.seller-rent-price,
+.seller-selling-price,
+.product-name {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+/* Hide the arrow container on mobile view */
+@media (max-width: 768px) {
+  .arrow-container {
+    display: none;
+  }
+
+  .product-cards {
+    justify-content: center;
+  }
+
+  .seller-card {
+    flex: 1 1 calc(50% - 10px); /* Display 2 cards per row on smaller screens */
+  }
+}
+
+.edit-button,
+.delete-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px; /* Adjust icon size */
+  color: black; /* Default color */
+}
+
+.edit-button:hover {
+  color: #00b35a; /* Color on hover */
+}
+
+.delete-button:hover {
+  color: red; /* Color on hover */
+}
+
+/* Positioning for the edit button */
+.edit-button {
+  position: absolute; /* Use absolute positioning */
+  bottom: 10px; /* Distance from the bottom */
+  left: 10px; /* Distance from the left */
+}
+
+/* Positioning for the delete button */
+.delete-button {
+  position: absolute; /* Use absolute positioning */
+  bottom: 10px; /* Distance from the bottom */
+  right: 10px; /* Distance from the right */
+}
+
+.seller-navbar {
+  display: flex;
+  justify-content: space-between; /* Space between the button groups */
+  align-items: center; /* Center align items vertically */
+  margin-bottom: 20px; /* Space below the navbar */
+}
+
+.nav-buttons {
+  display: flex;
+}
+
+.add-button {
+  display: flex;
+}
+
+.seller-navbar button {
+  background-color: #556b2f; /* Button background color */
+  color: white; /* Text color */
+  border: none; /* No border */
+  padding: 10px 20px; /* Padding around buttons */
+  margin: 0 10px; /* Space between buttons */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer on hover */
+  transition: background-color 0.3s; /* Transition effect */
+}
+
+.seller-navbar button:hover {
+  background-color: #1b5827; /* Darker background on hover */
+}
+
+.seller-navbar .nav-button.active {
+  background-color: #556b2f; /* Active button color */
+}
+
+.add-product-button {
+  background-color: #556b2f; /* Button background color */
+  color: white; /* Text color */
+  border: none; /* No border */
+  padding: 10px 20px; /* Padding around button */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer on hover */
+  transition: background-color 0.3s; /* Transition effect */
+}
+
+.add-product-button:hover {
+  background-color: #1b5827; /* Darker background on hover */
+}
+
+.seller-title {
+  text-align: center; /* Center the title text */
+  font-size: 24px; /* Font size for title */
+  font-weight: bold; /* Bold font */
+  margin-bottom: 20px; /* Space below the title */
+}

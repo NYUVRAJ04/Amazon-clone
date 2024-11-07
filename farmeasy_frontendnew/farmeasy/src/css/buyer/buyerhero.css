@@ -1,0 +1,42 @@
+.buyer-hero {
+  width: 100%;
+  overflow: hidden;
+  /* background-color: rgb(152, 152, 52); */
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buyer-hero-content {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Carousel image styling */
+.carousel-item img {
+  height: auto;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  width: 90%;
+}
+
+/* Media query for medium screens (tablets) */
+@media (min-width: 768px) {
+  .buyer-hero-content {
+    width: 90%;
+  }
+
+  .carousel-item img {
+    max-height: 500px;
+  }
+}
+
+/* Media query for large screens (desktops) */
+@media (min-width: 1024px) {
+  .buyer-hero-content {
+    width: 90%;
+  }
+}

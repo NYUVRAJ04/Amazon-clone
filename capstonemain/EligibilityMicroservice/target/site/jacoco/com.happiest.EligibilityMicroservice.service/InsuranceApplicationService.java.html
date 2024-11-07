@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>InsuranceApplicationService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">EligibilityMicroservice</a> &gt; <a href="index.source.html" class="el_package">com.happiest.EligibilityMicroservice.service</a> &gt; <span class="el_source">InsuranceApplicationService.java</span></div><h1>InsuranceApplicationService.java</h1><pre class="source lang-java linenums">package com.happiest.EligibilityMicroservice.service;
+
+
+import com.happiest.EligibilityMicroservice.dto.BuyerDTO;
+import com.happiest.EligibilityMicroservice.dto.InsuranceApplicationRequest;
+import com.happiest.EligibilityMicroservice.dto.InsuranceApplicationResponse;
+import com.happiest.EligibilityMicroservice.exception.InsuranceApplicationException;
+import com.happiest.EligibilityMicroservice.model.BuyersEntity;
+import com.happiest.EligibilityMicroservice.model.InsuranceApplication;
+import com.happiest.EligibilityMicroservice.repository.BuyersRepository;
+import com.happiest.EligibilityMicroservice.repository.InsuranceApplicationRepository;
+import com.happiest.EligibilityMicroservice.exception.ResourceNotFoundException;
+import com.happiest.EligibilityMicroservice.utility.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
+
+@Service
+<span class="fc" id="L24">public class InsuranceApplicationService {</span>
+
+    @Autowired
+    private InsuranceApplicationRepository insuranceApplicationRepository;
+
+    @Autowired
+    private BuyersRepository buyersRepository;
+
+    @Autowired
+    private BuyerHelper buyerHelper;
+
+    @Autowired
+    private AuthServiceClient authServiceClient; // Feign Client for Auth Service
+
+    @Autowired
+    private EligibilityEvaluator eligibilityEvaluator;
+
+    @Autowired
+    private InsuranceApplicationMapper applicationMapper;
+
+    @Autowired
+    private MessageSource messageSource;
+
+    @Transactional
+    public BuyersEntity updateBuyer(Long buyerId, BuyerDTO buyerDTO) {
+        try {
+<span class="fc" id="L50">            BuyersEntity buyersEntity = buyersRepository.findById(buyerId)</span>
+<span class="pc" id="L51">                    .orElseThrow(() -&gt; new ResourceNotFoundException(messageSource.getMessage(&quot;buyer.not.found&quot;, new Object[]{buyerId}, Locale.getDefault())));</span>
+
+<span class="fc" id="L53">            buyerHelper.updateFromDTO(buyersEntity, buyerDTO);</span>
+<span class="fc" id="L54">            buyersEntity.setEligibleForInsurance(eligibilityEvaluator.evaluateInsuranceEligibility(buyersEntity));</span>
+
+<span class="fc" id="L56">            return buyersRepository.save(buyersEntity);</span>
+<span class="nc" id="L57">        } catch (Exception ex) {</span>
+<span class="nc" id="L58">            throw new InsuranceApplicationException(ApplicationConstants.UPDATE_BUYER_FAILED, ex);</span>
+        }
+    }
+
+    @Transactional
+    public InsuranceApplicationResponse applyForInsurance(InsuranceApplicationRequest request) {
+        try {
+<span class="nc" id="L65">            BuyerDTO buyerDTO = authServiceClient.isBuyerExists(request.getBuyerId());</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">            if (buyerDTO == null) {</span>
+<span class="nc" id="L67">                throw new ResourceNotFoundException(messageSource.getMessage(&quot;buyer.not.found&quot;, new Object[]{request.getBuyerId()}, Locale.getDefault()));</span>
+            }
+
+<span class="nc" id="L70">            BuyersEntity buyersEntity = buyersRepository.findById(request.getBuyerId())</span>
+<span class="nc" id="L71">                    .orElseGet(() -&gt; buyersRepository.save(new BuyersEntity()));</span>
+
+<span class="nc" id="L73">            BuyerHelper.updateFromDTO(buyersEntity, buyerDTO);</span>
+<span class="nc" id="L74">            buyersEntity.setEligibleForInsurance(eligibilityEvaluator.evaluateInsuranceEligibility(buyersEntity));</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">            String status = buyersEntity.isEligibleForInsurance() ? &quot;APPROVED&quot; : &quot;REJECTED&quot;;</span>
+
+<span class="nc" id="L77">            InsuranceApplication application = new InsuranceApplication(request, buyersEntity, status);</span>
+<span class="nc" id="L78">            InsuranceApplication savedApplication = insuranceApplicationRepository.save(application);</span>
+
+<span class="nc" id="L80">            return applicationMapper.mapToResponse(savedApplication);</span>
+<span class="nc" id="L81">        } catch (Exception ex) {</span>
+<span class="nc" id="L82">            throw new InsuranceApplicationException(ApplicationConstants.INSURANCE_APPLICATION_FAILED, ex);</span>
+        }
+    }
+
+    public List&lt;InsuranceApplicationResponse&gt; getApplicationsForBuyer(Long buyerId) {
+<span class="nc" id="L87">        return insuranceApplicationRepository.findByBuyerBuyerId(buyerId).stream()</span>
+<span class="nc" id="L88">                .map(applicationMapper::mapToResponse)</span>
+<span class="nc" id="L89">                .collect(Collectors.toList());</span>
+    }
+
+    public InsuranceApplicationResponse getApplicationById(Long applicationId) {
+        try {
+<span class="nc" id="L94">            InsuranceApplication application = insuranceApplicationRepository.findById(applicationId)</span>
+<span class="nc" id="L95">                    .orElseThrow(() -&gt; new ResourceNotFoundException(messageSource.getMessage(&quot;application.not.found&quot;, new Object[]{applicationId}, Locale.getDefault())));</span>
+<span class="nc" id="L96">            return applicationMapper.mapToResponse(application);</span>
+<span class="nc" id="L97">        } catch (Exception ex) {</span>
+<span class="nc" id="L98">            throw new InsuranceApplicationException( ApplicationConstants.INSURANCE_APPLICATION_FAILED, ex);</span>
+        }
+    }
+
+    @Transactional
+    public InsuranceApplicationResponse updateApplicationStatus(Long applicationId, String status) {
+        try {
+<span class="fc" id="L105">            InsuranceApplication application = insuranceApplicationRepository.findById(applicationId)</span>
+<span class="pc" id="L106">                    .orElseThrow(() -&gt; new ResourceNotFoundException((messageSource.getMessage(&quot;application.not.found&quot;, new Object[]{applicationId}, Locale.getDefault()))));</span>
+<span class="fc" id="L107">            application.setStatus(status);</span>
+<span class="fc" id="L108">            insuranceApplicationRepository.save(application);</span>
+<span class="fc" id="L109">            return applicationMapper.mapToResponse(application);</span>
+<span class="nc" id="L110">        } catch (Exception ex) {</span>
+<span class="nc" id="L111">            throw new InsuranceApplicationException(ApplicationConstants.INSURANCE_APPLICATION_FAILED, ex);</span>
+        }
+    }
+
+    public Long getTotalInsuranceCount() {
+        try {
+<span class="nc" id="L117">            return insuranceApplicationRepository.count();</span>
+<span class="nc" id="L118">        } catch (Exception ex) {</span>
+<span class="nc" id="L119">            throw new InsuranceApplicationException(ApplicationConstants.COUNT_INSURANCE_FAILED, ex);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

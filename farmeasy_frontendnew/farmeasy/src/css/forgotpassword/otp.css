@@ -1,0 +1,160 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.otp-outer-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(209, 208, 188);
+  overflow: hidden;
+}
+
+.otp-inner-container {
+  width: 90%;
+  max-width: 1200px;
+  height: 92%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  overflow: auto;
+}
+
+.otp-image-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+
+.otp-fp-image {
+  height: auto;
+  max-height: 270px;
+}
+
+.otp-form-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.otp-form,
+.otp-email-form {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.otp-title {
+  font-size: 2.2rem;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.otp-input-field {
+  max-width: 380px;
+  width: 80%;
+  height: 45px;
+  background-color: #f0f0f0;
+  margin: 10px 0;
+  border-radius: 55px;
+  display: grid;
+  grid-template-columns: 15% 85%;
+  padding: 0.4rem;
+  transition: all 0.3s ease;
+}
+
+.otp-input-field:focus-within {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: #e0e0e0;
+}
+
+.otp-icon {
+  align-self: center;
+  line-height: 55px;
+  color: #acacac;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.otp-input-field input {
+  background: none;
+  outline: none;
+  border: none;
+  line-height: 1;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.otp-input-field input::placeholder {
+  color: #aaa;
+  font-weight: 50;
+}
+
+.otp-input-field input:focus::placeholder {
+  color: transparent;
+}
+
+.otp-input-field input:focus {
+  color: #000;
+}
+
+.otp-btn {
+  width: 95px;
+  height: 49px;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  cursor: pointer;
+  background-color: #c6e751e3;
+  color: #fff;
+  text-transform: uppercase;
+  margin-top: 20px;
+}
+
+.otp-btn:hover {
+  background-color: #798551e3;
+}
+
+.otp-register-text {
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
+
+.otp-register-text a {
+  color: #5995fd;
+  text-decoration: none;
+}
+
+.otp-register-text a:hover {
+  text-decoration: underline;
+}
+
+@media only screen and (min-width: 425px) {
+  .otp-inner-container {
+    flex-direction: row;
+  }
+
+  .otp-image-section {
+    flex: 3;
+    margin-bottom: 0;
+  }
+
+  .otp-form-section {
+    flex: 2;
+  }
+}

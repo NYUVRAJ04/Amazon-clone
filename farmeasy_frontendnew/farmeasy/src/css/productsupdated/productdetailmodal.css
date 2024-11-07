@@ -1,0 +1,39 @@
+.no-scrollbar .modal-dialog {
+  overflow-y: hidden; /* Hide the vertical scrollbar for the dialog */
+}
+
+.no-scrollbar .modal-body {
+  overflow-y: auto; /* Allow internal scrolling within the body */
+  height: 300px; /* Set a max height for the body */
+  padding: 20px; /* Add padding for better spacing */
+}
+
+.product-img-des {
+  display: flex; /* Use flexbox for layout */
+  align-items: flex-start; /* Align items at the top */
+  gap: 20px; /* Space between the image and text */
+}
+.product-details p {
+  margin: 0; /* Remove spacing between paragraphs */
+  font-weight: bold; /* Make content bold */
+}
+
+.modal-image {
+width: 40%;
+  height: auto; 
+}
+
+.product-details {
+  flex: 1; /* Take up the remaining width */
+}
+
+.modal-footer-custom {
+  margin-top: 20px; /* Space above the button */
+  text-align: center; /* Center align the button */
+}
+
+.success-message {
+  color: green; /* Success message color */
+  text-align: center; /* Center align the message */
+  margin-top: 10px; /* Space above the message */
+}

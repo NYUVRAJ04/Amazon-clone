@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: AuthService
+
+  http:
+    multipart:
+      enabled: true
+
+  security:
+    user:
+      name: root
+      password: root
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/capstone
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: 8099
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8090/eureka/
+
+mail:
+  host: smtp.gmail.com
+  port: 587
+  username: "nyuvraj04@gmail.com"
+  password: "uffhfrabtnoyjydy"
+  properties:
+    mail:
+      smtp:
+        auth: true
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+    org.springframework.cloud.openfeign: DEBUG
+    org.springframework.cloud.gateway: DEBUG

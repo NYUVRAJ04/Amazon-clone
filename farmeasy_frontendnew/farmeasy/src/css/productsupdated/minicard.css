@@ -1,0 +1,118 @@
+.product-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+.product-cards {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center; /* Align cards to the start */
+  max-width: 1200px;
+  width: 100%; /* Ensure the container takes full width */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.explore-all {
+  display: flex;
+  justify-content: flex-end; /* Aligns content to the right */
+  margin-top: 20px; /* Optional: Adds some space above */
+  margin-right: 30px;
+}
+
+.explore-all a {
+  color: black;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center; /* Aligns arrow vertically */
+  transition: color 0.3s ease;
+}
+
+.explore-all a:hover {
+  color: rgb(37, 63, 37); /* Darker shade on hover */
+}
+
+.explore-all .arrow {
+  margin-left: 5px; /* Space between text and arrow */
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+.explore-all a:hover .arrow {
+  transform: translateX(5px); /* Moves arrow on hover */
+}
+
+/* Display 4 cards per row on large screens */
+@media (min-width: 700px) {
+  .product-cards {
+    gap: 15px;
+  }
+
+  .mini-card {
+    flex: 1 1 calc(25% - 15px); /* Each card takes up 25% width, minus gap */
+  }
+}
+
+.mini-card {
+  width: 100%;
+  max-width: 200px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+.mini-card-image img {
+  width: 100%;
+  height: 180px;
+  border-radius: 4px;
+}
+
+.mini-rent-price,
+.mini-selling-price,
+.product-name {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.arrow-container {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  font-size: 24px;
+  color: #333;
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10; /* Ensure this is higher than other overlapping elements */
+  background-color: white; /* Optional: Add background to avoid overlap issues */
+}
+
+.arrow-icon:hover {
+  color: #007bff;
+}
+
+/* Hide the arrow container on mobile view */
+@media (max-width: 768px) {
+  .arrow-container {
+    display: none;
+  }
+
+  .product-cards {
+    justify-content: center;
+  }
+
+  .mini-card {
+    flex: 1 1 calc(50% - 10px); /* Display 2 cards per row on smaller screens */
+  }
+}

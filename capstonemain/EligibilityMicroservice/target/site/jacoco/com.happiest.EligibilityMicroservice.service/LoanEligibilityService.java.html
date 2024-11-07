@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LoanEligibilityService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">EligibilityMicroservice</a> &gt; <a href="index.source.html" class="el_package">com.happiest.EligibilityMicroservice.service</a> &gt; <span class="el_source">LoanEligibilityService.java</span></div><h1>LoanEligibilityService.java</h1><pre class="source lang-java linenums">package com.happiest.EligibilityMicroservice.service;
+
+import com.happiest.EligibilityMicroservice.dto.LoanApplicationDTO;
+import com.happiest.EligibilityMicroservice.dto.LoanEligibilityResponseDTO;
+import com.happiest.EligibilityMicroservice.exception.LoanApplicationException;
+import com.happiest.EligibilityMicroservice.model.BuyersEntity;
+import com.happiest.EligibilityMicroservice.model.LoanApplication;
+import com.happiest.EligibilityMicroservice.repository.BuyersRepository;
+import com.happiest.EligibilityMicroservice.repository.LoanApplicationRepository;
+import com.happiest.EligibilityMicroservice.utility.ApplicationConstants;
+import com.happiest.EligibilityMicroservice.utility.LoanEligibilityHelper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.stereotype.Service;
+
+import java.util.Locale;
+
+@Service
+<span class="fc" id="L19">public class LoanEligibilityService {</span>
+
+    @Autowired
+    private LoanApplicationRepository loanApplicationRepository;
+
+    @Autowired
+    private BuyersRepository buyerRepository;
+
+    @Autowired
+    private LoanEligibilityHelper loanEligibilityHelper;  // Inject the helper class
+
+    @Autowired
+    MessageSource messageSource;
+
+    /**
+     * Submits a loan application and checks the eligibility of the buyer.
+     * If the buyer is eligible, the loan application status is set to APPROVED; otherwise, it remains PENDING.
+     *
+     * @param loanApplicationDTO Data Transfer Object for the loan application.
+     * @return LoanEligibilityResponseDTO indicating whether the buyer is eligible or not.
+     */
+    public LoanEligibilityResponseDTO submitAndCheckLoanApplication(LoanApplicationDTO loanApplicationDTO) {
+        try {
+            // Set buyer from the buyerId
+<span class="fc" id="L43">            BuyersEntity buyer = buyerRepository.findById(loanApplicationDTO.getBuyerId())</span>
+<span class="fc" id="L44">                    .orElseThrow(() -&gt; new LoanApplicationException(</span>
+<span class="fc" id="L45">                            messageSource.getMessage(ApplicationConstants.LOAN_BUYER_NOT_FOUND,</span>
+<span class="fc" id="L46">                                    new Object[]{loanApplicationDTO.getBuyerId()}, Locale.getDefault())));</span>
+
+            // Update buyer details
+<span class="fc" id="L49">            buyer.setAnnualIncome(loanApplicationDTO.getAnnualIncome());</span>
+<span class="fc" id="L50">            buyer.setCreditScore(loanApplicationDTO.getCreditScore());</span>
+<span class="fc" id="L51">            buyer.setEligibleForLoan(buyer.isEligibleForLoan());  // Logic to determine eligibility should be in helper</span>
+
+            // Save updated buyer information
+<span class="fc" id="L54">                buyerRepository.save(buyer);</span>
+
+            // Create a new loan application
+<span class="fc" id="L57">            LoanApplication loanApplication = new LoanApplication();</span>
+<span class="fc" id="L58">            loanApplication.setBuyer(buyer);</span>
+<span class="fc" id="L59">            loanApplication.setAmountRequested(loanApplicationDTO.getAmountRequested());</span>
+<span class="fc" id="L60">            loanApplication.setPurpose(loanApplicationDTO.getPurpose());</span>
+<span class="fc" id="L61">            loanApplication.setIncomeVerification(loanApplicationDTO.getIncomeVerification());</span>
+<span class="fc" id="L62">            loanApplication.setCreditScore(loanApplicationDTO.getCreditScore());</span>
+<span class="fc" id="L63">            loanApplication.setDebtToIncomeRatio(loanApplicationDTO.getDebtToIncomeRatio());</span>
+<span class="fc" id="L64">            loanApplication.setCollateral(loanApplicationDTO.getCollateral());</span>
+<span class="fc" id="L65">            loanApplication.setStatus(LoanApplication.Status.REJECTED); // Default status</span>
+
+            // Check eligibility using the helper
+<span class="fc" id="L68">            LoanEligibilityResponseDTO response = loanEligibilityHelper.checkEligibility(buyer);</span>
+
+            // Ensure the response is not null
+<span class="fc bfc" id="L71" title="All 2 branches covered.">            if (response == null) {</span>
+<span class="fc" id="L72">                throw new LoanApplicationException(</span>
+<span class="fc" id="L73">                        messageSource.getMessage(ApplicationConstants.LOAN_ELIGIBILITY_CHECK_FAILED, null, Locale.getDefault()));</span>
+            }
+
+            // Update loan application status based on eligibility
+<span class="fc bfc" id="L77" title="All 2 branches covered.">            if (response.isEligible()) {</span>
+<span class="fc" id="L78">                loanApplication.setStatus(LoanApplication.Status.APPROVED);</span>
+            }
+
+            // Save the loan application regardless of the eligibility outcome
+<span class="fc" id="L82">            loanApplicationRepository.save(loanApplication);</span>
+<span class="fc" id="L83">            return response;</span>
+<span class="fc" id="L84">        }  catch (LoanApplicationException ex) {</span>
+            // Re-throw custom exceptions
+<span class="fc" id="L86">            throw ex;</span>
+<span class="nc" id="L87">        } catch (Exception ex) {</span>
+            // Handle any unexpected exceptions
+<span class="nc" id="L89">            throw new LoanApplicationException(</span>
+<span class="nc" id="L90">                    messageSource.getMessage(ApplicationConstants.LOAN_APPLICATION_FAILED, null, Locale.getDefault()), ex);</span>
+        }
+    }
+
+    public Long getTotalLoansCount() {
+        try {
+
+<span class="fc" id="L97">            return loanApplicationRepository.count();</span>
+<span class="fc" id="L98">        } catch (Exception ex) {</span>
+<span class="fc" id="L99">            throw new LoanApplicationException(messageSource.getMessage(ApplicationConstants.LOAN_APPLICATION_COUNT_FAILED, null, Locale.getDefault()), ex);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

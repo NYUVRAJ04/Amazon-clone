@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GlobalExceptionHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">EligibilityMicroservice</a> &gt; <a href="index.source.html" class="el_package">com.happiest.EligibilityMicroservice.exception</a> &gt; <span class="el_source">GlobalExceptionHandler.java</span></div><h1>GlobalExceptionHandler.java</h1><pre class="source lang-java linenums">package com.happiest.EligibilityMicroservice.exception;
+
+import com.happiest.EligibilityMicroservice.exception.ResourceNotFoundException;
+import com.happiest.EligibilityMicroservice.exception.InsuranceApplicationException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.WebRequest;
+
+import java.util.HashMap;
+import java.util.Map;
+
+@ControllerAdvice
+<span class="fc" id="L19">public class GlobalExceptionHandler {</span>
+<span class="fc" id="L20">    private static final Logger logger = LogManager.getLogger(GlobalExceptionHandler.class);</span>
+
+    // Handle validation errors
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity&lt;Map&lt;String, String&gt;&gt; handleValidationExceptions(MethodArgumentNotValidException ex) {
+<span class="nc" id="L25">        Map&lt;String, String&gt; errors = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L26">        ex.getBindingResult().getAllErrors().forEach((error) -&gt; {</span>
+<span class="nc" id="L27">            String fieldName = ((FieldError) error).getField();</span>
+<span class="nc" id="L28">            String errorMessage = error.getDefaultMessage();</span>
+<span class="nc" id="L29">            errors.put(fieldName, errorMessage);</span>
+
+            // Log validation error in error.log
+<span class="nc" id="L32">            logger.error(&quot;Validation error - {}: {}&quot;, fieldName, errorMessage);</span>
+<span class="nc" id="L33">        });</span>
+<span class="nc" id="L34">        return new ResponseEntity&lt;&gt;(errors, HttpStatus.BAD_REQUEST);</span>
+    }
+    // Handle ResourceNotFoundException
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity&lt;?&gt; handleResourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
+<span class="fc" id="L39">        return new ResponseEntity&lt;&gt;(ex.getMessage(), HttpStatus.NOT_FOUND);</span>
+    }
+
+    // Handle InsuranceApplicationException
+    @ExceptionHandler(InsuranceApplicationException.class)
+    public ResponseEntity&lt;?&gt; handleInsuranceApplicationException(InsuranceApplicationException ex, WebRequest request) {
+<span class="fc" id="L45">        return new ResponseEntity&lt;&gt;(ex.getMessage(), HttpStatus.BAD_REQUEST);</span>
+    }
+
+    // General error handler for other exceptions
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity&lt;String&gt; handleExceptions(Exception ex) {
+<span class="fc" id="L51">        logger.error(&quot;Error occurred: &quot;, ex);  // Log full exception to error.log</span>
+<span class="fc" id="L52">        return new ResponseEntity&lt;&gt;(&quot;An error occurred: &quot; + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);</span>
+    }
+
+    // Handle BuyerNotFoundException
+    @ExceptionHandler(BuyerNotFoundException.class)
+    public ResponseEntity&lt;?&gt; handleBuyerNotFoundException(BuyerNotFoundException ex, WebRequest request) {
+<span class="fc" id="L58">        return new ResponseEntity&lt;&gt;(ex.getMessage(), HttpStatus.NOT_FOUND);</span>
+    }
+
+    // Handle LoanApplicationException
+    @ExceptionHandler(LoanApplicationException.class)
+    public ResponseEntity&lt;?&gt; handleLoanApplicationException(LoanApplicationException ex, WebRequest request) {
+<span class="fc" id="L64">        return new ResponseEntity&lt;&gt;(ex.getMessage(), HttpStatus.BAD_REQUEST);</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

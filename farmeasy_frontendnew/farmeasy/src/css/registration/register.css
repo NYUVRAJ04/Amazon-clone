@@ -1,0 +1,150 @@
+/* Container styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.raga-oc {
+  min-height: 100vh;
+  background-color: #e9f5e1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.ragaregister-container {
+  margin: 25px;
+  width: 90%;
+  max-width: 400px;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header styling */
+.ragaheader {
+  font-size: 2rem;
+  color: #2b3a42;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Form styling */
+.ragaform {
+  width: 100%;
+}
+
+.ragaform-group {
+  margin-bottom: 20px;
+}
+
+.ragaform-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #2b3a42;
+}
+
+.ragaform-group div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.ragaform-icon {
+  margin-right: 10px;
+  color: #556b2f;
+}
+
+.ragaform-group input,
+.ragaform-group select,
+.ragaform-group textarea {
+  flex: 1;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #a1c4d4;
+  background-color: #f9f9f9;
+  transition: border 0.3s, box-shadow 0.3s;
+}
+
+.ragaregister-button {
+  align-items: center;
+  width: 100%; /* Full width for button */
+  padding: 12px 0;
+  background: #556b2f;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s, transform 0.3s;
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+  margin-top: 15px;
+}
+
+.ragaform-group.raga-button {
+  display: flex;
+  justify-content: center;
+  width: 80px;
+}
+
+.ragaregister-button:hover {
+  background: #6b8e23;
+}
+
+.ragaregister-button:focus {
+  outline: none;
+}
+
+/* Success message styling */
+.ragasuccess-message {
+  color: #2ecc71; /* Green color for success messages */
+  margin-bottom: 15px; /* Space below success message */
+  text-align: center; /* Center align the success message */
+  font-size: 0.9rem; /* Smaller font size */
+}
+
+.ragaerror-message {
+  color: red;
+  font-size: 0.875em;
+  margin-top: 5px;
+}
+
+.required-asterisk {
+  color: red;
+  margin-left: 2px;
+}
+
+/* Login message styling */
+.ragalogin-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; /* Adjusted margin for spacing */
+}
+
+.ragalogin-message p {
+  margin-right: 10px; /* Space between text and button */
+  color: #2b3a42;
+  font-size: 1rem; /* Slightly smaller font size */
+}
+
+.ragaerror-message {
+  font-size: 0.7rem;
+}
+
+.raga-button {
+  align-items: center;
+}
+
+.raga-btn-con {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

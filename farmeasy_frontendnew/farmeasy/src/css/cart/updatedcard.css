@@ -1,0 +1,78 @@
+/* updatedcard.css */
+
+.cart-main {
+  padding: 20px;
+  background-color: #f8f9fa; /* Light background color */
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.icon {
+  font-size: 24px;
+  cursor: pointer;
+  color: #506d2c; /* Adjust color as needed */
+}
+
+.icon:hover {
+  color: #4c6132; /* Adjust hover color as needed */
+}
+
+.app-title {
+  text-align: center;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.cart-con {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cart-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.cart-content-main {
+  margin-top: 20px;
+}
+
+.cart-items-main {
+  margin-bottom: 20px;
+}
+
+.total-price-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total-prices {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout-button-container {
+  text-align: right;
+}
+
+.checkout-button {
+  background-color: #506d2c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.checkout-button:hover {
+  background-color: #4c6132;
+}

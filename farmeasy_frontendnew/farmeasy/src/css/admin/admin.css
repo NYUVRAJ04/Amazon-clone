@@ -1,0 +1,112 @@
+/* General styles */
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* .admin-header {
+  width: 100%;
+  background-color: #f8f9fa; 
+  padding: 10px 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000; 
+} */
+
+.sidebar {
+  width: 240px;
+  background-color: #343a40;
+  color: #fff;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  z-index: 999;
+}
+
+/* Content styles */
+.admin-content {
+  margin-left: 240px; /* Match the width of the sidebar */
+  padding: 0 20px 20px 20px; /* Adjust padding to account for fixed header */
+  flex-grow: 1; /* Allow the content to grow and fill the remaining space */
+  overflow-y: auto; /* Enable scrolling if content overflows */
+}
+
+.admin-content h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Stats cards styles */
+.stats-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.card-admin {
+  width: calc(25% - 20px); /* Account for margins */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin: 10px 0; /* Adjust margin for better spacing */
+  color: #fff; /* Text color */
+}
+
+.card-admin:nth-child(1) {
+  background-color: #4caf50; /* Green */
+}
+
+.card-admin:nth-child(2) {
+  background-color: #2196f3; /* Blue */
+}
+
+.card-admin:nth-child(3) {
+  background-color: #ff9800; /* Orange */
+}
+
+.card-admin:nth-child(4) {
+  background-color: #f44336; /* Red */
+}
+
+.card-admin h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.card-admin p {
+  text-align: center;
+  font-size: 16px;
+  margin: 0;
+}
+
+/* Charts section styles */
+.charts-section {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Ensure charts wrap on smaller screens */
+}
+
+.chart {
+  width: 48%;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin: 10px 0; /* Adjust margin for better spacing */
+}
+
+.chart h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.chart canvas {
+  width: 100% !important; /* Ensure canvas takes full width */
+  height: auto !important; /* Maintain aspect ratio */
+}

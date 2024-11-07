@@ -1,0 +1,47 @@
+.resource-item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin: 16px;
+  transition: transform 0.2s;
+}
+
+.resource-item:hover {
+  transform: translateY(-5px);
+}
+
+.resource-item h3 {
+  font-size: 1.5em;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.resource-item p {
+  font-size: 1em;
+  color: #666;
+  margin-bottom: 16px;
+}
+
+.download-button,
+.learnmore {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: background-color 0.2s;
+}
+
+.download-button:hover,
+.learnmore:hover {
+  background-color: #0056b3;
+}
+
+.download-button .me-2 {
+  margin-right: 8px;
+}

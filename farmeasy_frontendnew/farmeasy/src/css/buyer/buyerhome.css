@@ -1,0 +1,40 @@
+.header-buyer {
+  position: sticky;
+  top: 0; /* Ensure the header sticks to the top */
+  z-index: 1000; /* Ensure the header stays above other content */
+  background-color: #f8f8f8; /* Match the background color */
+  padding: 20px;
+}
+
+.buyer-hero-home {
+  margin-bottom: 20px;
+}
+
+.machinery-cards {
+  margin: 20px;
+  min-height: 300px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.crop-cards {
+  margin: 20px;
+  min-height: 300px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.resource-home-card-main {
+  margin: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  /* padding: 20px; */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

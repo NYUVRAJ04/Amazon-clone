@@ -1,0 +1,7 @@
+.custom-navbar {
+  position: relative;
+}
+
+.dropdown-menu {
+  z-index: 1050; /* Adjust as necessary */
+}

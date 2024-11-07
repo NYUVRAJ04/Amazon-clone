@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LoanEligibilityController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">EligibilityMicroservice</a> &gt; <a href="index.source.html" class="el_package">com.happiest.EligibilityMicroservice.controller</a> &gt; <span class="el_source">LoanEligibilityController.java</span></div><h1>LoanEligibilityController.java</h1><pre class="source lang-java linenums">package com.happiest.EligibilityMicroservice.controller;
+
+import com.happiest.EligibilityMicroservice.dto.LoanApplicationDTO;
+import com.happiest.EligibilityMicroservice.dto.LoanEligibilityResponseDTO;
+import com.happiest.EligibilityMicroservice.exception.LoanApplicationException;
+import com.happiest.EligibilityMicroservice.service.LoanEligibilityService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping(&quot;/loan&quot;)
+@CrossOrigin
+public class LoanEligibilityController {
+
+    @Autowired
+    private LoanEligibilityService loanEligibilityService;
+
+<span class="fc" id="L20">    public LoanEligibilityController(LoanEligibilityService loanEligibilityService) {</span>
+<span class="fc" id="L21">        this.loanEligibilityService = loanEligibilityService;</span>
+<span class="fc" id="L22">    }</span>
+
+    @PostMapping(&quot;/apply&quot;)
+    public ResponseEntity&lt;?&gt; submitLoanApplication(@RequestBody LoanApplicationDTO loanApplicationDTO) {
+        try {
+            // Submit the loan application and check eligibility
+<span class="fc" id="L28">            LoanEligibilityResponseDTO eligibilityResponse = loanEligibilityService.submitAndCheckLoanApplication(loanApplicationDTO);</span>
+
+            // Return the eligibility response
+<span class="fc bfc" id="L31" title="All 2 branches covered.">            if (eligibilityResponse.isEligible()) {</span>
+<span class="fc" id="L32">                return ResponseEntity.ok(eligibilityResponse);</span>
+            } else {
+<span class="fc" id="L34">                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(eligibilityResponse);</span>
+            }
+<span class="nc" id="L36">        } catch (LoanApplicationException ex) {</span>
+            // Handle specific exceptions
+<span class="nc" id="L38">            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ErrorResponse(ex.getMessage()));</span>
+<span class="nc" id="L39">        } catch (Exception ex) {</span>
+            // Handle unexpected exceptions
+<span class="nc" id="L41">            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse(&quot;An unexpected error occurred.&quot;));</span>
+        }
+    }
+
+    @GetMapping(&quot;/count&quot;)
+    public ResponseEntity&lt;Long&gt; getTotalLoanApplications() {
+        try {
+<span class="fc" id="L48">            Long count = loanEligibilityService.getTotalLoansCount();</span>
+<span class="fc" id="L49">            return ResponseEntity.ok(count);</span>
+<span class="nc" id="L50">        } catch (Exception ex) {</span>
+<span class="nc" id="L51">            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);</span>
+        }
+    }
+
+    // Define an ErrorResponse class to standardize error responses
+    private static class ErrorResponse {
+        private String message;
+
+<span class="nc" id="L59">        public ErrorResponse(String message) {</span>
+<span class="nc" id="L60">            this.message = message;</span>
+<span class="nc" id="L61">        }</span>
+
+        public String getMessage() {
+<span class="nc" id="L64">            return message;</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

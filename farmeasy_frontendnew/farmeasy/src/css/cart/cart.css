@@ -1,0 +1,130 @@
+.cart-container {
+  width: 100%;
+  max-width: 1200px;
+  height: auto; /* Change height to auto for better responsiveness */
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.cart-header h3 {
+  margin: 0;
+  font-size: 24px; /* Increased font size for better readability */
+}
+
+.icon {
+  cursor: pointer;
+  font-size: 24px;
+  color: #5e7f35; /* Added color for better visibility */
+  transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+.icon:hover {
+  color: #5e7f35; /* Change color on hover */
+}
+
+.cart-items {
+  margin-top: 20px;
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px; /* Added margin for spacing */
+}
+
+.cart-table th,
+.cart-table td {
+  padding: 12px; /* Increased padding for better spacing */
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.cart-item-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+/* 
+.cart-quantity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
+.cart-quantity button {
+  padding: 5px 10px; /* Added horizontal padding */
+  margin: 0 5px;
+  background-color: #ddd;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px; /* Rounded corners for buttons */
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.cart-quantity button:hover {
+  background-color: #ccc; /* Change background on hover */
+}
+
+.cart-quantity span {
+  min-width: 30px; /* Increased minimum width for better display */
+  text-align: center;
+}
+
+.cart-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.cart-actions .btn {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px; /* Rounded corners for buttons */
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.cart-actions .btn-primary {
+  background-color: #5e7f35;
+  color: white;
+}
+
+.cart-actions .btn-primary:hover {
+  background-color: #273b0e; /* Darken on hover */
+}
+
+.cart-actions .btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.cart-actions .btn-secondary:hover {
+  background-color: #5a6268; /* Darken on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .cart-container {
+    padding: 10px; /* Reduced padding on smaller screens */
+  }
+
+  .cart-header h3 {
+    font-size: 20px; /* Adjusted font size for smaller screens */
+  }
+
+  .cart-table th,
+  .cart-table td {
+    padding: 8px; /* Reduced padding for smaller screens */
+  }
+}

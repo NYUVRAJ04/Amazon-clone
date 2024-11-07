@@ -1,0 +1,101 @@
+/* Container styles */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #e9f5e1; /* Soft green background */
+}
+
+.inner-container {
+  background-color: white;
+  border-radius: 15px;
+  padding: 20px;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.login-title h4 {
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: #4b5320; /* Dark earthy green */
+}
+
+.icon-container {
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.main-icon {
+  color: #8cb369; /* Soft green to represent agriculture */
+}
+
+.form-container {
+  padding: 20px;
+}
+
+.login-form-group {
+  display: flex;
+  align-items: center;
+}
+
+.login-form-group .icon {
+  color: #4b5320; /* Dark earthy green */
+  font-size: 1.5rem;
+}
+
+.form-control-lg {
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: 1px solid #4b5320; /* Green border */
+}
+
+.form-control-lg::placeholder {
+  color: #556b2f; /* Dark olive green for placeholders */
+}
+
+.btn-success {
+  background-color: #556b2f; /* Olive green */
+  /* width: 70%; */
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 1.2rem;
+}
+
+.btn-success:hover {
+  background-color: #6b8e23; /* Lighter green on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .inner-container {
+    padding: 10px;
+  }
+
+  .main-icon {
+    font-size: 60px;
+  }
+
+  .form-control-lg {
+    font-size: 0.9rem;
+  }
+
+  .btn-success {
+    font-size: 1rem;
+  }
+}
+
+/* Additional link styles */
+.register a {
+  color: #556b2f; /* Olive green */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.text-center a:hover {
+  text-decoration: underline; /* Underline on hover */
+}

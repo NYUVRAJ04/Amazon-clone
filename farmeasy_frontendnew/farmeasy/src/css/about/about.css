@@ -1,0 +1,79 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.card {
+  min-height: 250px;
+  width: 100vw;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow to the cards */
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px); /* Card hover effect */
+}
+.card-text {
+  overflow: hidden;
+  text-overflow: ellipsis; /* Show ellipsis for overflow text */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* Limit to 3 lines */
+}
+
+.about-container {
+  background-color: #f8f9fa;
+  padding: 50px 0;
+}
+
+.about-title {
+  font-size: 1.2rem;
+  color: #34495e;
+  margin-bottom: 40px;
+}
+
+.video-section {
+  margin-top: 40px;
+}
+
+.video-title {
+  font-size: 2rem;
+  color: #2980b9;
+  margin-bottom: 20px;
+}
+
+.embed-responsive {
+  margin: auto; /* Center the video */
+  max-width: 100%; /* Ensure the video doesn't overflow */
+}
+
+.vision-container {
+  padding: 50px 0;
+  background-color: #f0f8ff;
+}
+
+.vision-title {
+  font-size: 1.1rem;
+  color: #34495e;
+  line-height: 1.5;
+}
+
+.bg-light-green {
+  background-color: #f0f9f0; /* Light green background */
+}
+
+.bg-why-con {
+  background-color: #eaf8e6;
+}
+
+.what-we-offer-con {
+  background-color: #f8f8f8;
+  padding: 50px 0;
+}
